@@ -1,3 +1,5 @@
+注意readme.md文件会直接显示在github目录下面。
+
 # [demo01.py](demo01.py)
 是介绍的标准库概览
 
@@ -8,6 +10,8 @@
 介绍日期和时间的使用
 
 # [markdown语法](markdown语法.md)
-介绍它的基本语法
+介绍基本语法
+
+
 
 
