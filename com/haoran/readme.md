@@ -1,27 +1,40 @@
-注意readme.md文件(名称必须是readme)会直接显示在github目录下面。
+注意：
+```
+readme.md文件(名称必须是readme)会直接显示在github目录下面。
+
+在文件中写中文方法的原因是便于在structure中快速查找。
+
+添加很多`if 0`的原因是为了开关方法，而不是直接取选中注释。
+```
 
 ## [markdown语法](markdown语法.md)
-介绍基本语法
+介绍markdown基本语法
 
-## [Number](Number.py)
-介绍基本数据类型：数字
+## 基本数据类型
+数字 [Number](Number.py)
 
-## [PrintAndInput](PrintAndInput.py)
-输入输出函数
+字符串 [String](String.py)
 
-## [String](String.py)
-介绍基本数据类型：String
+输入输出函数 [PrintAndInput](PrintAndInput.py)
+
+列表 [List](List.py)
+
+元组 [Tuple](Tuple.py)
+
+## 控制流工具
+if语句 [If](If.py)
 
 
 
 
 
 
-## [demo10](demo10.py)
-介绍标准库概览
+---
 
-## [demo02.py](demo02.py)
-介绍正则表达式
+## 其他
 
-## [demo03.py](demo03.py)
-介绍日期和时间的使用
+[demo10](demo10.py) 标准库概览
+
+[demo02.py](demo02.py) 正则表达式
+
+[demo03.py](demo03.py) 日期和时间的使用

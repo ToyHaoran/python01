@@ -1,15 +1,19 @@
-# ————————————————————————————基本数据类型
-if 1:
-    # ————————————Number（数字）
+def 数据类型():
     if 1:
+        print("赋值======")
         a = b = c = 1
         print(a + b + c)  # 3
+        print("数据类型======")
         a, b, c, d = 20, 5.5, True, 4 + 3j  # 4+3j是一个复数
         print(type(a), type(b), type(c), type(d))  # <class 'int'> <class 'float'> <class 'bool'> <class 'complex'>
         print(isinstance(a, int))  # True
         # type()不会认为子类是一种父类类型。
         # isinstance()会认为子类是一种父类类型。
+        a = "abc" # 变量本身类型不固定的语言称之为动态语言(python)，与之对应的是静态语言(java)。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错
+        print(a)
 
+def 算数运算符():
+    if 0:
         print("——————算数运算符")
         print("a" * 10)
         print(2 ** 11)  # 幂运算符  2048
@@ -19,6 +23,8 @@ if 1:
         print(5 // 2.0)  # 2.0
         print(5 % 2)  # 1
 
+def 数学函数():
+    if 0:
         print("————————数学函数")
         import math
 
@@ -28,6 +34,8 @@ if 1:
         # 注意一个坑
         print(round(10.5), round(11.5))  # 10 12
 
+def 随机数函数():
+    if 0:
         print("————————随机数函数")
         import random
 
@@ -43,3 +51,9 @@ if 1:
         print(random.randint(10, 20))  # 整数
 
         print("————————三角函数，跳过")
+
+if __name__ == '__main__':
+    数据类型()
+    算数运算符()
+    数学函数()
+    随机数函数()
