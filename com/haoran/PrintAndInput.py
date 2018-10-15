@@ -7,10 +7,18 @@ def 输出函数():
         print()
 
 def 输入函数():
-    if 0:
+    if 1:
         print("input函数=============")
         name = input("输入你的名字：")
         print("你的名字是:", name)
+
+        # input()返回的数据类型是str
+        s = input('birth: ')
+        birth = int(s) # 必须要转化一下
+        if birth < 2000:
+            print('00前')
+        else:
+            print('00后')
 
 def 行与缩进():
     if 0:

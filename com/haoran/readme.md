@@ -24,8 +24,19 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 ## 控制流工具
 if语句 [If](If.py)
 
+循环语句 [For](For.py)
+
+迭代器
+
+函数 [Function](Function.py)
 
 
+
+# Bug汇总
+- unindent does not match any outer indentation level
+  肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
+  Whites space，看看有没有问题
+-
 
 
 
