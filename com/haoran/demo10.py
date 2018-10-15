@@ -27,7 +27,7 @@ if __name__ == '__main__':
         #通用工具脚本经常调用命令行参数。这些命令行参数以链表形式存储于 sys 模块的 argv 变量。
         # 例如在命令行中执行 "python demo.py one two three" 后可以得到以下输出结果:
         import sys
-        print(sys.argv) #就是运行时在python.exe后面的代码 H:/code/idea/python/com/haoran/demo01.py
+        print(sys.argv) #就是运行时在python.exe后面的代码 H:/code/idea/python/com/haoran/demo10.py
 
     if 0:
         print("错误输出重定向和程序终止=================")

@@ -1,4 +1,5 @@
-if __name__ == '__main__':
+
+def 正则表达式():
     import re
     print("正则表达式==================")
     # re模块为高级字符串处理提供了正则表达式工具。对于复杂的匹配和处理，正则表达式提供了简洁、优化的解决方案:
@@ -79,7 +80,8 @@ if __name__ == '__main__':
         print(re.search("wor", a)) # <re.Match object; span=(6, 9), match='wor'>
 
 
-
+if __name__ == '__main__':
+    正则表达式()
 
 
 
