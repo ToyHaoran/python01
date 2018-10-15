@@ -4,7 +4,7 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 在文件中写中文方法的原因是便于在structure中快速查找。
 
-添加很多`if 0`的原因是为了开关方法，而不是选中然后注释。
+添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
 ```
 
 ## [markdown语法](markdown语法.md)
@@ -32,7 +32,7 @@ if语句 [If](If.py)
 
 
 
-# Bug汇总
+## Bug汇总
 - unindent does not match any outer indentation level
   肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
   Whites space，看看有没有问题。细心点，有时候只是一个空格导致的。
