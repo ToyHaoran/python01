@@ -130,19 +130,6 @@ def 参数组合():
         f1(*args, **kw) # 解压
 
 
-def Lambda表达式():
-    if 0:
-        print("Lambda表达式（匿名函数）=============")
-        def make_sum():
-            return lambda arg1, arg2: arg1 + arg2
-        sum = make_sum() # sum是一个函数
-        print("相加后的值为 : ", sum(10, 20))
-
-        print("传递一个小函数作为参数=========")
-        pairs = [(1, 'd'), (2, 'c'), (3, 'a'), (4, 'b')]
-        pairs.sort(key=lambda pair: pair[1]) # 根据第二个的首字母排序
-        print(pairs)  # [(3, 'a'), (4, 'b'), (2, 'c'), (1, 'd')]
-
 
 
 def 变量作用域():
@@ -193,7 +180,6 @@ if __name__ == "__main__":
     传递可变对象()
     默认参数()
     不定长参数()
-    Lambda表达式()
     return语句()
     变量作用域()
     数据类型转换()

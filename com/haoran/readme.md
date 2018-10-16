@@ -2,9 +2,10 @@
 ```
 readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
-在文件中写中文方法的原因是便于在structure中快速查找。
+在文件中写中文方法的原因是为了便于在structure中快速查找。
 
 添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
+（虽然不规范，但能提高效率）
 ```
 ## 参考
 
@@ -18,34 +19,34 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 介绍markdown基本语法
 
 ## 数据结构
-输入输出函数 [PrintAndInput](PrintAndInput.py)
+[输入输出函数](print_and_input.py)
 
-数字 [Number](Number.py)
+[数字](number.py)
 
-字符串 [String](String.py)
+[字符串](string.py)
 
-列表 [List](List.py)
+[列表](list.py)
 
-元组 [Tuple](Tuple.py)
+[元组](tuple.py)
 
-集合 [Set](Set.py)
+[集合](set.py)
 
-字典 [Dictionary](Dictionary.py)
+[字典](dictionary.py)
 
 
 
 ## 控制流工具
-if语句 [If](If.py)
+[if语句](if.py)
 
-循环语句 [For](For.py)
+[循环语句](for.py)
 > 包括 while, for, pass, Range, 迭代器, 生成器.
 
-函数 [Function](Function.py)
+[函数](function.py)
 > 传递不可变对象，传递可变对象，默认参数， 不定长参数，
 > Lambda表达式，return语句，变量作用域， 数据类型转换， 关键字参数，
 > 命名关键字参数， 参数组合。
 
-函数式编程 [Function2](Function2.py)
+[函数式编程](function2.py)
 
 
 ## Bug汇总

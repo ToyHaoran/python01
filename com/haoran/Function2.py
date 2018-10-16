@@ -107,13 +107,69 @@ def 排序算法():
         # 实现忽略大小写的排序
         print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower))
         # 降序排列
-        print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse = True))
+        print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True))
 
         students = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
         from operator import itemgetter
         print(sorted(students, key=itemgetter(1)))
-        print(sorted(students, key=lambda t: t[1]))
+        print(sorted(students, key=lambda t: t[1])) # Student未改变
+        # 或
+        students.sort(key=lambda t: t[1]) # 返回None，Student已经改变
+        print(students)
 
+def 函数作为返回值():
+    if 0:
+        def make_sum(*args):
+            def sum():
+                ax = 0
+                for n in args:
+                    ax = ax + n
+                return ax
+            return sum
+        f = make_sum(1, 3, 5, 7, 9) # 返回sum()
+        print(f())
+
+def 闭包():
+    if 0:
+        def count():
+            fs = []
+            for i in range(1, 4):
+                def f():
+                    return i*i
+                fs.append(f)
+            return fs
+        # 每次循环，都创建了一个新的函数，然后，把创建的3个函数都返回了。
+        # 你可能认为调用f1()，f2()和f3()结果应该是1，4，9，但实际结果是9,9,9
+        f1, f2, f3 = count()
+        print(f1())
+        print(f2())
+        print(f3())
+        # 全部都是9！原因就在于返回的函数引用了变量i，但它并非立刻执行。等到3个函数都返回时，它们所引用的变量i已经变成了3，因此最终结果为9。
+        # 返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+        # 解决方式：
+        def count():
+            def f(j):
+                def g():
+                    return j*j
+                return g
+            fs = []
+            for i in range(1, 4):
+                fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()
+            return fs
+        f1, f2, f3 = count()
+        print(f1())
+        print(f2())
+        print(f3())
+
+        # 缺点是代码较长，可利用lambda函数缩短代码。
+
+def Lambda表达式():
+    if 0:
+        print("Lambda表达式（匿名函数）=============")
+        def make_sum():
+            return lambda arg1, arg2: arg1 + arg2
+        sum = make_sum() # sum是一个函数
+        print("相加后的值为 : ", sum(10, 20))
 
 if __name__ == '__main__':
     高阶函数()
@@ -122,3 +178,7 @@ if __name__ == '__main__':
     map_reduce练习()
     filter函数()
     排序算法()
+    函数作为返回值()
+    Lambda表达式()
+    闭包()
+
