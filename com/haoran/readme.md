@@ -6,11 +6,18 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
 ```
+## 参考
+
+[廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+
+[菜鸟教程](http://www.runoob.com/python3/python3-tutorial.html)
+
+[Python3.7官方文档](https://docs.python.org/3/tutorial/index.html)
 
 ## [markdown语法](markdown语法.md)
 介绍markdown基本语法
 
-## 基本数据类型
+## 数据结构
 输入输出函数 [PrintAndInput](PrintAndInput.py)
 
 数字 [Number](Number.py)
@@ -21,22 +28,31 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 元组 [Tuple](Tuple.py)
 
+集合 [Set](Set.py)
+
+字典 [Dictionary](Dictionary.py)
+
+
+
 ## 控制流工具
 if语句 [If](If.py)
 
 循环语句 [For](For.py)
-
-迭代器
+> 包括 while, for, pass, Range, 迭代器, 生成器.
 
 函数 [Function](Function.py)
+> 传递不可变对象，传递可变对象，默认参数， 不定长参数，
+> Lambda表达式，return语句，变量作用域， 数据类型转换， 关键字参数，
+> 命名关键字参数， 参数组合。
 
+函数式编程 [Function2](Function2.py)
 
 
 ## Bug汇总
 - unindent does not match any outer indentation level
   肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
   Whites space，看看有没有问题。细心点，有时候只是一个空格导致的。
--
+- 
 
 
 

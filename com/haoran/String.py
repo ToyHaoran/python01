@@ -64,7 +64,7 @@ def 字符串编码():
 
 def 字符串访问():
     if 0:
-        print("字符串访问==========")
+        print("字符串访问，截取==========")
         #索引值以 0 为开始值，-1 为从末尾的开始位置。
         #从后面索引：-6 -5 -4 -3 -2 -1
         #从前面索引： 0  1  2  3  4  5
@@ -155,7 +155,7 @@ def 字符串内建函数():
         str3 ="-"
         print(str3.join(("aaa","bbb","ccc")))
         print(str.lower())
-        print(str.title()) #单词首字母大写
+        print(str.title()) #单词首字母大写,其他变为小写
         print(str.upper()) #字符串变大写
         print(str.swapcase())
         print(str.ljust(10,"-"))

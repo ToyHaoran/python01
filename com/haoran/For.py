@@ -69,9 +69,21 @@ def Range语句():
         print()
 
         print(list(range(5)))# [0, 1, 2, 3, 4]
+        print(list(reversed(range(5)))) # [4, 3, 2, 1, 0]
         print(list(enumerate(a))) #[(0, 'Google'), (1, 'Baidu'), (2, 'Runoob'), (3, 'Taobao'), (4, 'QQ')]
 
-def 斐波纳契数列():
+def 递归调用():
+    if 0:
+        # 递归函数的优点是定义简单，逻辑清晰
+        # Python解释器没有对尾递归做优化。但是scala优化了。
+        print("求n的阶乘=========")
+        def fact(n):
+            if n==1:
+                return 1
+            return n * fact(n - 1)
+        print(fact(5))
+
+def 循环小案例():
     if 0:
         # 斐波纳契数列
         # 两个元素的总和确定了下一个数
@@ -82,7 +94,6 @@ def 斐波纳契数列():
             a, b = b, a + b  # 先计算右边表达式，然后同时赋值给左边
         print()
 
-def 百钱百鸡():
     if 0:
         """
        求解《百钱百鸡》问题
@@ -98,24 +109,19 @@ def 百钱百鸡():
                 else:
                     print("dd")
 
+    if 0:
+        """
+        找出100~999之间的所有水仙花数
+        水仙花数是各位立方和等于这个数本身的数
+        如: 153 = 1**3 + 5**3 + 3**3
+        """
+        for num in range(100, 1000):
+            low = num % 10
+            mid = num // 10 % 10
+            high = num // 100
+            if num == low ** 3 + mid ** 3 + high ** 3:
+                print(num)
 
-
-
-def 水仙花数():
- if 0:
-    """
-    找出100~999之间的所有水仙花数
-    水仙花数是各位立方和等于这个数本身的数
-    如: 153 = 1**3 + 5**3 + 3**3
-    """
-    for num in range(100, 1000):
-        low = num % 10
-        mid = num // 10 % 10
-        high = num // 100
-        if num == low ** 3 + mid ** 3 + high ** 3:
-            print(num)
-
-def 输出2到99之间的素数():
     if 0:
         """
         输出2~99之间的素数
@@ -130,8 +136,7 @@ def 输出2到99之间的素数():
             if is_prime:
                 print(num, end=' ')
 
-def 乘法口诀表():
-    if 1:
+    if 0:
         """
         输出乘法口诀表(九九表)
         """
@@ -140,16 +145,113 @@ def 乘法口诀表():
                 print('%d*%d=%d' % (i, j, i * j), end='\t')
             print()
 
+def 生成器():
+    if 0:
+        print("生成器====yield====================")
+        def fibonacci(n, w=0):  # 生成器函数 - 斐波那契
+            a, b, counter = 0, 1, 0
+            while True:
+                if (counter > n):
+                    return
+                yield a
+                a, b = b, a + b
+                print('%d,%d' % (a, b))
+                counter += 1
+        # 如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator
+        # f 是一个迭代器，由生成器返回生成
+        f = fibonacci(10, 0)
+        while True:
+            try:
+                print(next(f), end=" ")
+            except StopIteration:
+                break
 
+def 生成器小案例():
+    if 0:
+        print("生成器小案例============")
+        # 打个比方的话，yield有点像断点。
+        # 加了yield的函数，每次执行到有yield的时候，会返回yield后面的值
+        # 并且函数会暂停，直到下次调用或迭代终止；
+        def myYield_1():
+            a, i = 'yield', 0
+            while True:
+                print('before %d' % i, end=", ")
+                yield a, i # 暂停
+                print('after %d' % i, end=", ")
+                i += 1
+
+        def myYield_2():
+            a, i = 'yield_a', 0
+            b, i = 'yield_b', 0
+            while True:
+                print('before %d' % i, end=", ")
+                yield a, i # 暂停
+                yield b, i # 暂停
+                print('after %d' % i, end=", ")
+                i += 1
+
+        it1 = iter(myYield_1())
+        it2 = iter(myYield_2())
+
+        for i in range(10):
+            print("next %d" % i, end=": ")
+            print(next(it1))
+        print('\n')
+
+        for i in range(10):
+            print("next %d" % i, end=": ")
+            print(next(it2))
+
+def 迭代器():
+    if 0:
+        print("迭代器=====================")
+        # 我们已经知道，可以直接作用于for循环的数据类型有以下几种：
+        # 一类是集合数据类型，如list、tuple、dict、set、str等；
+        # 一类是generator，包括生成器和带yield的generator function。
+        # 这些可以直接作用于for循环的对象统称为可迭代对象：Iterable。
+        from _collections_abc import Iterable
+        print(isinstance([], Iterable)) # True
+        # 可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator
+        from _collections_abc import Iterator
+        print(isinstance([], Iterator)) # False
+        # 生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。
+        # 把list、dict、str等Iterable变成Iterator可以使用iter()函数：
+        list1 = [1, 2, 3, 4]
+        it = iter(list1)
+        print(next(it))  # 1
+        print(next(it))  # 2
+        for x in it:
+            print(x, end=" ")  # 3,4
+        print()
+
+        print("自定义迭代器=======================")
+        class MyNumbers:
+            def __iter__(self):
+                self.a = 1
+                return self
+
+            def __next__(self):
+                if self.a <= 10:
+                    x = self.a
+                    self.a += 1
+                    return x
+                else:
+                    raise StopIteration
+
+        myclass = MyNumbers()
+        myiter = iter(myclass)
+        for x in myiter:
+            print(x)
+            # print(next(myiter))#抛出异常
 
 if __name__ == '__main__':
-    斐波纳契数列()
     while语句()
     for语句及else语句()
     Range语句()
     pass语句()
-    斐波纳契数列()
-    百钱百鸡()
-    水仙花数()
-    输出2到99之间的素数()
-    乘法口诀表()
+    循环小案例()
+    递归调用()
+
+    迭代器()
+    生成器()
+    生成器小案例()
