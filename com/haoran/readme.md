@@ -15,38 +15,48 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 [Python3.7官方文档](https://docs.python.org/3/tutorial/index.html)
 
-## [markdown语法](markdown语法.md)
-介绍markdown基本语法
+## 准备工作
+[markdown语法](markdown语法.md)
+
+[python编码规范](python编码规范.md)
 
 ## 数据结构
-[输入输出函数](print_and_input.py)
+[输入输出函数](print_and_input_demo.py)
 
-[数字](number.py)
+[数字](number_demo.py)
 
-[字符串](string.py)
+[字符串](string_demo.py)
 
-[列表](list.py)
+[列表](list_demo.py)
 
-[元组](tuple.py)
+[元组](tuple_demo.py)
 
-[集合](set.py)
+[集合](set_demo.py)
 
-[字典](dictionary.py)
+[字典](dictionary_demo.py)
 
 
 
 ## 控制流工具
-[if语句](if.py)
+[if语句](if_demo.py)
 
-[循环语句](for.py)
+[循环语句](for_demo.py)
 > 包括 while, for, pass, Range, 迭代器, 生成器.
 
-[函数](function.py)
+[函数](function_demo.py)
 > 传递不可变对象，传递可变对象，默认参数， 不定长参数，
 > Lambda表达式，return语句，变量作用域， 数据类型转换， 关键字参数，
 > 命名关键字参数， 参数组合。
 
-[函数式编程](function2.py)
+[函数式编程](function_demo2.py)
+> 高阶函数() map函数() reduce函数() map_reduce练习() filter函数()
+> 排序算法() 函数作为返回值() Lambda表达式() 闭包() 装饰器() 装饰类练习()
+> 偏函数()
+
+[模块](module)
+
+
+
 
 ## Bug汇总
 - unindent does not match any outer indentation level
@@ -60,8 +70,8 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 ## 其他
 
-[demo10](demo10.py) 标准库概览
+[标准库概览](demo10.py)
 
-[demo02.py](demo02.py) 正则表达式
+[正则表达式](demo02.py)
 
-[日期和时间的使用](data_and_calendar.py)
+[日期和时间的使用](data_and_calendar_demo.py)

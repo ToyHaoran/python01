@@ -39,7 +39,7 @@ def 列表():
         a.pop(2)
         print(a.count(3)) # 3出现的次数
         print(len(a)) # a的长度是多少
-        # 详细的列表排序见 com/haoran/function2.py 排序算法
+        # 详细的列表排序见 com/haoran/function_demo2.py 排序算法
         a.sort()  #[3, 3, 4, 9]
         a.clear()
 

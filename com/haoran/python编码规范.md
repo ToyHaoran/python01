@@ -44,8 +44,9 @@
 - 为所有的共有模块、函数、类、方法写docstrings；非共有的没有必要，但是可以写注释（在def的下一行）
 
 # 命名
+- java中很多驼峰命名，而python中几乎看不到。
 - 文件名(模块)：简短、小写、可以使用下划线。
-- 包：简短、小写、不能使用下划线。如mypackage
+- 包：简短、小写、**不能使用下划线**。如mypackage
 - 类：使用CapWords的方式，模块内部使用的类采用_CapWords的方式
   - 类的属性(方法和变量)：全小写、下划线
   - 类的属性有3种作用域public、non-public和subclass API，可以理解成C++中的public、private、protected，non-public属性前，前缀一条下划线。

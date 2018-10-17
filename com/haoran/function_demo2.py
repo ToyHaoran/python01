@@ -183,7 +183,7 @@ def Lambda表达式():
         print("相加后的值为 : ", sum(10, 20))
 
 def 装饰器():
-    if 1:
+    if 0:
         def now():
             print("现在")
         # 现在，假设我们要增强now()函数的功能，
@@ -207,7 +207,7 @@ def 装饰器():
 
             now() # now = log(now)
 
-        if 1:
+        if 0:
             # 如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本
             def log(text):
                 def decorator(func):
@@ -224,6 +224,70 @@ def 装饰器():
             now() #  now = log('execute')(now)
             # 首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数
 
+            # 以上两种decorator的定义都没有问题，但还差最后一步。
+            # 因为我们讲了函数也是对象，它有__name__等属性，但你去看经过decorator装饰之后的函数，它们的__name__已经从原来的'now'变成了'wrapper'：
+            print(now.__name__)
+
+        if 0:
+            # 因为返回的那个wrapper()函数名字就是'wrapper'，所以，需要把原始函数的__name__等属性复制到wrapper()函数中，否则，有些依赖函数签名的代码执行就会出错。
+            # 不需要编写wrapper.__name__ = func.__name__这样的代码，Python内置的functools.wraps就是干这个事的，所以，一个完整的decorator的写法如下
+            import functools
+
+            def log(func):
+                @functools.wraps(func)
+                def wrapper(*args, **kw):
+                    print('call %s():' % func.__name__)
+                    return func(*args, **kw)
+                return wrapper
+
+            def log(text):
+                def decorator(func):
+                    @functools.wraps(func)
+                    def wrapper(*args, **kw):
+                        print('%s %s():' % (text, func.__name__))
+                        return func(*args, **kw)
+                    return wrapper
+                return decorator
+def 装饰类练习():
+    if 0:
+        # 请设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间
+        import functools
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kw):
+                star = time.perf_counter()
+                func(*args, **kw) # 这里感觉有点问题，func执行了两次。。
+                end = time.perf_counter()
+                print("%s的运行时间是：%s" %(func.__name__, end-star))
+                return func(*args, **kw)
+            return  wrapper
+
+        @decorator
+        def fast(x, y):
+            time.sleep(3)
+            return x + y
+
+        print(time.perf_counter())
+        print(fast(11, 22)) # func执行了两次
+        print(time.perf_counter())
+
+def 偏函数():
+    if 1:
+        # 在介绍函数参数的时候，我们讲到，通过设定参数的默认值，可以降低函数调用的难度。而偏函数也可以做到这一点
+        # 简而言之：就是固定一些参数的默认值。自定义函数，将函数作为返回值也可以。
+        print("原来=======")
+        def int2(x, base=2):
+            return int(x, base)
+        print(int2('1000000'))
+
+        print("现在=======")
+        # 只不过是调用简单，感觉没多大用。
+        import functools
+        int2 = functools.partial(int, base=2)
+        print(int2('1000000'))
+
+        max2 = functools.partial(max, 10)
+        print(max2(5, 6, 7))
 
 if __name__ == '__main__':
     高阶函数()
@@ -236,4 +300,5 @@ if __name__ == '__main__':
     Lambda表达式()
     闭包()
     装饰器()
-
+    装饰类练习()
+    偏函数()
