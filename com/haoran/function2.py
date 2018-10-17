@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 # Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言
+
+import time
+
 def 高阶函数():
     if 0:
         print("函数作为参数==========")
@@ -119,18 +122,24 @@ def 排序算法():
 
 def 函数作为返回值():
     if 0:
-        def make_sum(*args):
+        def lazy_sum(*args):
             def sum():
                 ax = 0
                 for n in args:
                     ax = ax + n
                 return ax
             return sum
-        f = make_sum(1, 3, 5, 7, 9) # 返回sum()
+        f = lazy_sum(1, 3, 5) # 返回sum()
+        f2 = lazy_sum(2, 4, 6) # 返回sum()
         print(f())
+        print(f2())
+        # 在这个例子中，我们在函数lazy_sum中又定义了函数sum，并且，内部函数sum可以引用外部函数lazy_sum的参数和局部变量，
+        # 当lazy_sum返回函数sum时，相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”的程序结构拥有极大的威力
 
 def 闭包():
     if 0:
+        print("使用循环创建同时创建多个函数========")
+        print("错误案例======")
         def count():
             fs = []
             for i in range(1, 4):
@@ -147,6 +156,7 @@ def 闭包():
         # 全部都是9！原因就在于返回的函数引用了变量i，但它并非立刻执行。等到3个函数都返回时，它们所引用的变量i已经变成了3，因此最终结果为9。
         # 返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
         # 解决方式：
+        print("正确案例========")
         def count():
             def f(j):
                 def g():
@@ -166,10 +176,54 @@ def 闭包():
 def Lambda表达式():
     if 0:
         print("Lambda表达式（匿名函数）=============")
+        # 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
         def make_sum():
             return lambda arg1, arg2: arg1 + arg2
         sum = make_sum() # sum是一个函数
         print("相加后的值为 : ", sum(10, 20))
+
+def 装饰器():
+    if 1:
+        def now():
+            print("现在")
+        # 现在，假设我们要增强now()函数的功能，
+        # 比如，在函数调用前后自动打印日志，但又不希望修改now()函数的定义，
+        # 这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。
+
+        if 0:
+            # 我们要定义一个能打印日志的decorator
+            # 因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数
+            # 我们要借助Python的@语法，把decorator置于函数的定义处：now()上面
+            # 必须将log函数放在now函数上面。
+            def log(func):
+                def wrapper(*args, **kw):
+                    print('call %s():' % func.__name__)
+                    return func(*args, **kw)
+                return wrapper
+
+            @log
+            def now():
+                print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+            now() # now = log(now)
+
+        if 1:
+            # 如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本
+            def log(text):
+                def decorator(func):
+                    def wrapper(*args, **kw):
+                        print('%s %s():' % (text, func.__name__))
+                        return func(*args, **kw)
+                    return wrapper
+                return decorator
+
+            @log('execute')
+            def now():
+                print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+            now() #  now = log('execute')(now)
+            # 首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数
+
 
 if __name__ == '__main__':
     高阶函数()
@@ -181,4 +235,5 @@ if __name__ == '__main__':
     函数作为返回值()
     Lambda表达式()
     闭包()
+    装饰器()
 

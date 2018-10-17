@@ -1,8 +1,10 @@
 
-if __name__ == '__main__':
-    import time
-    import calendar
-    if 0:
+
+import time
+import calendar
+
+def time模块():
+    if 1:
         print("time模块==========")
         #Python 提供了一个 time 和 calendar 模块可以用于格式化日期和时间。
         now = time.time()  # 获取当前时间戳，是以秒为单位的浮点小数，从1970年1月1日午夜开始
@@ -60,8 +62,9 @@ if __name__ == '__main__':
         print(time.process_time())
 
 
-    if 1:
-        print("Calendar模块===========")
+def calendar模块():
+    if 0:
+        print("calendar模块===========")
         # 返回一个多行字符串格式的year年年历，3个月一行，间隔距离为c。
         # 每日宽度间隔为w字符。每行长度为21*W+18+2*C。l是每星期行数。
         print(calendar.calendar(2018,w=2,l=1,c=6))
@@ -98,3 +101,6 @@ if __name__ == '__main__':
         print(calendar.weekday(2018,10,27))
 
 
+if __name__ == '__main__':
+    time模块()
+    calendar模块()

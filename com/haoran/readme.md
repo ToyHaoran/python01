@@ -48,7 +48,6 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 [函数式编程](function2.py)
 
-
 ## Bug汇总
 - unindent does not match any outer indentation level
   肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
@@ -65,4 +64,4 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 [demo02.py](demo02.py) 正则表达式
 
-[demo03.py](demo03.py) 日期和时间的使用
+[日期和时间的使用](data_and_calendar.py)
