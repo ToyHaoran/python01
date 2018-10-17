@@ -86,87 +86,114 @@ def 字符串访问():
         print('P' in word)
 
 def 字符串格式化():
+    # 目前有三种方式：
     if 0:
-        # 参考：
-        # https://docs.python.org/3.7/reference/lexical_analysis.html#f-strings
-        # https://docs.python.org/3.7/library/string.html#formatstrings
-        # https://docs.python.org/3.7/library/stdtypes.html#old-string-formatting
-        print("字符串格式化=============")
-        print("我叫 %s 今年 %d 岁!" % ('小明', 10))#我叫 小明 今年 10 岁!
-        print( "{1} {0} {1}".format("hello", "world"))
+        print("方式1：字符串前面加个f==========")
+        year = 2018
+        mon = 10
+        # 能运行，但是语法上报错,推测是代码检查的工具还没有更新（3.6更新的）
+        # print(f"3+3的结果是{3+3}")
+        # print(f"今天是{year}年{mon}月")
+
+
+        # table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 7678}
+        # for name, phone in table.items():
+        #     print(f'{name:10} ==> {phone:10d}')
+
+        # 使用的{phone:10d}等格式和format是相同的。
+        # 参考：https://docs.python.org/3.7/library/string.html#formatspec
+
+    if 1:
+        print("方式2：str.format()方法==========")
+
+        # 通过位置设置参数
+        print("{1} {0} {1}".format("hello", "world"))
         # 通过字典设置参数
         site = {"name": "菜鸟教程", "url": "www.runoob.com"}
-        print("网站名：{name}, 地址 {url}".format(**site))
+        print("网站名：{name}, 地址：{url}".format(**site)) # 解压
+        print("网站名：{0[name]}, 地址：{0[url]}".format(site))
         # 通过列表索引设置参数
-        my_list = ['菜鸟教程', 'www.runoob.com']
-        print("网站名：{0[0]}, 地址 {0[1]}".format(my_list)) # "0" 是必须的
-        print("数字格式化================")
-        print("百分号的用法，比较旧了，会逐渐淘汰掉========")
-        #百分号的用法%[(name)][flags][width].[precision]typecode
-        print("%6.3f" % 2.3)#宽度为6，小数3位，右对齐，浮点型，前面有一空格 2.300
-        print("%.2f" % 2.232)#保留两位小数
-        print("%+5x" % -10)#右对齐，宽度5，前面3空格
+        my_list = ['菜鸟教程', 'www.runoob.com', 4444]
+        print("网站名：{0}, 地址：{1}, 价钱：{2:d}".format(*my_list)) # 解压
+        print("网站名：{0[0]}, 地址：{0[1]}, 价钱：{0[2]:b}".format(my_list))  # "0" 是必须的
+
+        # 对数字进行格式化
+        print("{:.2f}".format(3.1415926))  # 保留两位小数
+        print("{:+.2f}".format(-3.1415926))  # 带符号保留两位小数
+        print("{:.0f}".format(3.14))  # 不保留小数
+        print("{:0>2d}".format(5))  # 数字补零，填充左边，宽度为2
+        print("{:x<4d}".format(10))  # 数字补x，填充右边，宽度为4
+        print("{:,}".format(1000000))  # 逗号分隔
+        print("{:.2%}".format(0.25))  # 百分比格式，两位小数
+        print("{:.2e}".format(1000000))  # 指数记法 1.00e+06
+        print("{:10d}".format(13))  # 右对齐，保持10位
+        print("{:>10d}".format(13))  # 右对齐，保持10位
+        print("{:<10d}".format(13))  # 左对齐
+        print("{:^10d}".format(13))  # 居中对齐
+        print('{:b}'.format(11))  # 二进制
+        print('{:d}'.format(11))  # 十进制
+        print('{:o}'.format(11))  # 八进制
+        print('{:x}'.format(11))  # 十六进制 b
+        print('{:#x}'.format(11))  # 0xb
+        print('{:#X}'.format(11))  # 0XB
+
+        # 左边填充空格
+        for x in range(1, 11):
+            print('{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x))
+
+    if 0:
+        print("方式3：%方法（已经过时,但是能用）======")
+        # 参考：https://docs.python.org/3.7/library/stdtypes.html#old-string-formatting
+        print("我叫 %s 今年 %d 岁!" % ('小明', 10))#我叫 小明 今年 10 岁!
+
+        # 对数字进行格式化
+        # 百分号的用法%[(name)][flags][width].[precision]typecode
+        print("%6.3f" % 2.3)  # 宽度为6，小数3位，右对齐，浮点型，前面有一空格 2.300
+        print("%.2f" % 2.232)  # 保留两位小数
+        print("%+5x" % -10)  # 右对齐，宽度5，前面3空格
         import math
-        print ("pi的值是%s" % math.pi)
-        print("%10.*f" % (4, 1.2))#    1.2000
-        print("format的用法=========================")
-        print("{:.2f}".format(3.1415926))#保留两位小数
-        print("{:+.2f}".format(-3.1415926))#带符号保留两位小数
-        print("{:.0f}".format(3.14))#不保留小数
-        print("{:0>2d}".format(5))#数组补零，填充左边，宽度为2
-        print("{:x<4d}".format(10))#数字补x，填充右边，宽度为4
-        print("{:,}".format(1000000))#逗号分隔
-        print("{:.2%}".format(0.25))#百分比格式，两位小数
-        print("{:.2e}".format(1000000))#指数记法 1.00e+06
-        print("{:10d}".format(13))#右对齐，保持10位
-        print("{:>10d}".format(13))#右对齐，保持10位
-        print("{:<10d}".format(13))#左对齐
-        print("{:^10d}".format(13))#居中对齐
-        print('{:b}'.format(11))#二进制
-        print('{:d}'.format(11))#十进制
-        print('{:o}'.format(11))#八进制
-        print('{:x}'.format(11))#十六进制 b
-        print('{:#x}'.format(11))#0xb
-        print('{:#X}'.format(11))#0XB
+        print("pi的值是%s" % math.pi)
+        print("%10.*f" % (4, 1.2))  # 1.2000
 
 def 字符串内建函数():
     if 0:
         print("字符串内建函数====================")
         # 参考：
         # https://docs.python.org/3.7/library/stdtypes.html#string-methods
-        str = "hello"
+        str1 = "hello"
         str2 = "123"
-        print(str.capitalize()) # 首字母大写
-        print(str.center(9,"-"))
-        print(str.count("ll",0,5)) # 字母出现的次数
-        print(str.startswith("he",0,10)) #字符串是不是以he开头
-        print(str.endswith("lo",0,10)) #字符串是不是以lo结尾
-        print(str.find("e")) # 1
-        print(str.rfind("e")) # 1
-        print(str.index("e"))
-        print(str.rindex("e"))
-        print((str+str2).isalnum()) # 如果字符串中的所有字符都是字母数字且至少有一个字符，则返回true，否则返回false
+        print(str1.capitalize())  # 首字母大写
+        print(str1.center(9, "-"))
+        print(str1.count("ll", 0, 5))  # 字母出现的次数
+        print(str1.startswith("he", 0, 10))  # 字符串是不是以he开头
+        print(str1.endswith("lo", 0, 10))  # 字符串是不是以lo结尾
+        print(str1.find("e"))  # 1
+        print(str1.rfind("e"))  # 1
+        print(str1.index("e"))
+        print(str1.rindex("e"))
+        print((str1 + str2).isalnum())  # 如果字符串中的所有字符都是字母数字且至少有一个字符，则返回true，否则返回false
         print(str2.isdigit())
-        print(str.isalpha())
-        print(str.islower())
-        print(str.isupper()) # 字符串是不是大写
-        print(str.istitle())
-        print(len(str))
-        str3 ="-"
-        print(str3.join(("aaa","bbb","ccc")))
-        print(str.lower())
-        print(str.title()) #单词首字母大写,其他变为小写
-        print(str.upper()) #字符串变大写
-        print(str.swapcase())
-        print(str.ljust(10,"-"))
-        print(str.rjust(10,"-"))
-        print(str.lstrip("he"))
-        print(str.rstrip("lo"))
-        print(str.strip("o"))
-        print(max(str))
-        print(min(str))
-        print(str.replace("he","HE",1))
-        print(str.split("e"))
+        print(str1.isalpha())
+        print(str1.islower())
+        print(str1.isupper())  # 字符串是不是大写
+        print(str1.istitle())
+        print(len(str1))
+        str3 = "-"
+        print(str3.join(("aaa", "bbb", "ccc")))
+        print(str1.lower())
+        print(str1.title())  # 单词首字母大写,其他变为小写
+        print(str1.upper())  # 字符串变大写
+        print(str1.swapcase())
+        print(str1.ljust(10, "-"))
+        print(str1.rjust(10, "-"))
+        print("12".zfill(5))  # str.zfill()用零填充左侧的数字字符串
+        print(str1.lstrip("he"))
+        print(str1.rstrip("lo"))
+        print(str1.strip("o"))
+        print(max(str1))
+        print(min(str1))
+        print(str1.replace("he", "HE", 1))
+        print(str1.split("e"))
 
 def 文档字符串(aa):
     """
@@ -180,7 +207,7 @@ def 文档字符串(aa):
     :param aa: 传入的参数
     :return:  不返回任何东西
     """
-    if 1:
+    if 0:
         print("文档字符串=====")
         print(aa)
 

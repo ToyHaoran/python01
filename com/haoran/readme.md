@@ -5,6 +5,7 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 在文件中写中文方法的原因是为了便于在structure中快速查找。
 
 添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
+setting-搜索inspections-Python-取消勾选unreachable code
 （虽然不规范，但能提高效率）
 ```
 ## 参考
@@ -20,9 +21,9 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 [python编码规范](python编码规范.md)
 
-## 数据结构
-[输入输出函数](print_and_input_demo.py)
 
+
+## 数据结构
 [数字](number_demo.py)
 
 [字符串](string_demo.py)
@@ -34,7 +35,6 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 [集合](set_demo.py)
 
 [字典](dictionary_demo.py)
-
 
 
 ## 控制流工具
@@ -53,12 +53,24 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 > 排序算法() 函数作为返回值() Lambda表达式() 闭包() 装饰器() 装饰类练习()
 > 偏函数()
 
-[模块](module)
+## 其他
+[输入输出函数](print_and_input_demo.py)
 
+![读写模式](img/读写模式.png)
 
+json暂时跳过
+http://www.runoob.com/python3/python3-json.html
 
+[模块](module/test1/demo03.py)
+> 以及 [demo04](module/test1/demo04.py) [demo05](module/test2/demo05.py)
 
-## 小Bug
+[标准库概览](demo10.py)
+
+[正则表达式](regexp_demo.py)
+
+[日期和时间的使用](data_and_calendar_demo.py)
+
+## 小而皮的Bug
 - unindent does not match any outer indentation level
   肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
   Whites space，看看有没有问题。细心点，有时候只是一个空格导致的。
@@ -66,12 +78,4 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 
 
----
 
-## 其他
-
-[标准库概览](demo10.py)
-
-[正则表达式](demo02.py)
-
-[日期和时间的使用](data_and_calendar_demo.py)

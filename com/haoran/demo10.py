@@ -14,7 +14,7 @@ if __name__ == '__main__':
     if 0:
         import shutil
         print("日常的文件和目录管理任务============")
-        shutil.copyfile("demo02.py", "../test01/xxx.py")
+        #shutil.copyfile("demoxxxx.py", "../test01/xxx.py")
 
     if 0:
         print("文件通配符=====================")
