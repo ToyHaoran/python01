@@ -58,7 +58,7 @@ readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 
 
-## Bug汇总
+## 小Bug
 - unindent does not match any outer indentation level
   肯定是报错的附近代码没有对齐，或者Tab和空格混用。 View-Active edit-show
   Whites space，看看有没有问题。细心点，有时候只是一个空格导致的。
