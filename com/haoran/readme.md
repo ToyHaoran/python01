@@ -54,6 +54,7 @@ setting-搜索inspections-Python-取消勾选unreachable code
 > 偏函数()
 
 ## 面向对象
+[类与对象](class_and_object_demo.py)
 
 
 ## 其他
