@@ -3,7 +3,7 @@
 readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
 在文件中写中文方法的原因是为了便于在structure中快速查找。
-
+(虽然不规范，但是美观，调试代码方便)
 添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
 setting-搜索inspections-Python-取消勾选unreachable code
 （虽然不规范，但能提高效率）
