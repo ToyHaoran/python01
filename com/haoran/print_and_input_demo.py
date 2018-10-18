@@ -36,6 +36,10 @@ def 输入函数():
             print('00前')
         else:
             print('00后')
+    if 0:
+        user_input = input('输入一个列表，用逗号隔开:\n').strip()
+        list1 = [int(item) for item in user_input.split(',')]
+        print(list1)
 
 def 文件读写():
     if 0:
