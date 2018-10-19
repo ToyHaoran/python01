@@ -64,12 +64,11 @@ setting-搜索inspections-Python-取消勾选unreachable code
 ## 其他
 [输入输出函数](print_and_input_demo.py)
 
-[mysql数据库读取](mysql_demo.py)
-
 ![读写模式](img/读写模式.png)
 
-json暂时跳过
-http://www.runoob.com/python3/python3-json.html
+[mysql数据库读取](mysql_demo.py)
+
+[json](json_demo.py)
 
 [模块](module/test1/demo03.py)
 > 以及 [demo04](module/test1/demo04.py) [demo05](module/test2/demo05.py)
