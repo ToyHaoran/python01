@@ -26,9 +26,9 @@ def 对象创建():
         print(df.index)
         print(df.columns)
         print(df.values)
-        print("describe()快速统计摘要=======")
+        print("快速统计摘要=======")
         print(df.describe())
-        print("转置您的数据======")
+        print("转置数据======")
         print(df.T)
         print("按轴、值排序========")
         print(df.sort_index(axis=1, ascending=False))
@@ -36,12 +36,38 @@ def 对象创建():
 
     if 1:
         # 选择
+        # Getting
         print("选择某列====")
         print(df["A"])
-        print("选择某几行======")
-        print(df[0:2])
-        print(df['20130102':'20130104']) # 2,3,4行
-        print()
+        print("选择某几行：切片======")
+        print(df[0:2])  # 1,2行
+        print(df['20130102':'20130104'])  # 2,3,4行
+        # 按标签选择
+        print("使用标签获取横截面======")
+        print(df.loc[dates[0]])  # 注意是中括号
+        print("使用标签选择多轴=========")
+        print(df.loc[dates[1], ['A', 'B']])
+        print(df.loc['20130102', ['A', 'B']])
+        print(df.loc[:, ['A', 'B']])
+        print(df.loc['20130102':'20130104', ['A', 'B']])
+        print("获取标量值=======")
+        print(df.loc[dates[0],'A'])
+        # 按位置选择
+        print("通过传递的整数的位置选择====")
+        print(df.iloc[3])
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     if 0:
@@ -54,6 +80,7 @@ def 对象创建():
                             'F': 'foo'})
         print(df2)
         print(df2.dtypes) # 每个列都是不同的类型
+
 
 
 
