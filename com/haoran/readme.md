@@ -2,11 +2,15 @@
 ```
 readme.md文件(名称必须是readme)会直接显示在github目录下面。
 
-在文件中写中文方法的原因是为了便于在structure中快速查找。
+在文件中写中文方法的原因是为了便于在structure中快速查找，并且大大增加可读性。
+(提高可读性，可以省略很多注释，一目了然，而如果用英文有时会导致歧义)
+(比如：异常和异常处理，exception_and_exception_handling)
+(只是用来练习，不要斤斤计较，如果你认为英文可读性更强，那你用英文)
+(正式项目中还是应该用英文小写加下划线)
 
 添加很多 if 0 的原因是为了开关部分代码，而不是选中然后注释。
 setting-搜索inspections-Python-取消勾选unreachable code
-（虽然不规范，但能提高效率）
+（虽然不规范，但能提高调试效率，增加可读性）
 ```
 ## 参考
 
@@ -59,6 +63,8 @@ setting-搜索inspections-Python-取消勾选unreachable code
 
 ## 其他
 [输入输出函数](print_and_input_demo.py)
+
+[mysql数据库读取](mysql_demo.py)
 
 ![读写模式](img/读写模式.png)
 
