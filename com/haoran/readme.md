@@ -26,7 +26,6 @@ setting-搜索inspections-Python-取消勾选unreachable code
 [python编码规范](python编码规范.md)
 
 
-
 ## 数据结构
 [数字](number_demo.py)
 

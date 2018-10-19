@@ -1,7 +1,4 @@
 
-from __future__ import print_function
-
-
 def 冒泡排序():
     if 0:
         # https://en.wikipedia.org/wiki/Bubble_sort
@@ -44,9 +41,9 @@ def 桶排序():
                     max_value = mylist[i]
 
             # Initialize buckets
-            bucketCount = math.floor((max_value - min_value) / bucket_size) + 1
+            bucket_count = math.floor((max_value - min_value) / bucket_size) + 1
             buckets = []
-            for i in range(0, bucketCount):
+            for i in range(0, bucket_count):
                 buckets.append([])
 
             # For putting values in buckets
