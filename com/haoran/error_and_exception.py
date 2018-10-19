@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import traceback
 
 def 语法错误():
     if 0:
@@ -20,10 +21,12 @@ def 异常及异常处理():
         """
         try:
             print(9/0) #ZeroDivisionError
-            #'2' + 2 #TypeError
+            # '2' + 2 #TypeError
             print("hello")
         except ZeroDivisionError as err:
-            print("除数不能为0:{0}".format(err))
+            print("基本信息：", str(err))
+            print("较详细信息：", repr(err))
+            print("最详细信息：", traceback.format_exc()) # 使用traceback.print_exc()打印异常信息到标准错误，就像没有获取一样
         except (RuntimeError, NameError):
             print("其他异常")
         except:

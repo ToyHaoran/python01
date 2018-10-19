@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # 推荐使用anaconda
+import traceback
+
 import mysql.connector
+import sys
 
 def connect_mysql_db():
     if 1:
@@ -31,7 +34,7 @@ def connect_mysql_db():
             passwd="root",
             database="taotao"
         )
-        print("连上了")
+        print("连上了!")
         return db
 
 def create_table(db):
@@ -65,19 +68,30 @@ def insert_rows(db):
                     ('005', 'HP', 70),
                     ('006', 'YF', 66),
                     ('007', 'TEST', 100)"""
+        sql2 =  "INSERT INTO Student(ID, Name, Grade) VALUES (%s, %s, %s)" % ('Mac', 20, 'boy')
 
-        #sql = "INSERT INTO Student(ID, Name, Grade) \
-        #    VALUES ('%s', '%s', '%d')" % \
-        #    ('001', 'HP', 60)
+        # 批量插入
+        sqlmany = "INSERT INTO Student(ID, Name, Grade) VALUES (%s, %s, %s)" # 这里是个占位符，不是格式化%，不要用%d
+        val = [('001', 'CZQ', 70),
+               ('002', 'LHQ', 80),
+               ('003', 'MQ', 90),
+               ('004', 'WH', 80),
+               ('005', 'HP', 70),
+               ('006', 'YF', 66),
+               ('007', 'TEST', 100)]
 
         try:
             # 执行sql语句
-            cursor.execute(sql)
+            # cursor.execute(sql)
+            # 批量插入
+            cursor.executemany(sqlmany, val)
+
             # 提交到数据库执行
             db.commit()
             print("插入数据成功")
         except:
             # Rollback in case there is any error
+            print("错误信息：", traceback.format_exc())
             print('插入数据失败!')
             db.rollback()
 
@@ -87,15 +101,24 @@ def delete_rows(db):
         cursor = db.cursor()
 
         # SQL 删除语句
-        sql = "DELETE FROM Student WHERE Grade = '%d'" % (100)
+        # sql = "DELETE FROM Student WHERE Grade = '%d'" % (100)
+        sql = "DELETE FROM Student"
+
+        # 为了防止数据库查询发生 SQL 注入的攻击，我们可以使用 %s 占位符来转义删除语句的条件：
+        sql = "DELETE FROM Student WHERE ID = %s"
+        na = ["001"]
 
         try:
             # 执行SQL语句
-            cursor.execute(sql)
+            cursor.execute(sql, na)
+
+            # 可以用循环拼接删除字符串来批量删除。
+
             # 提交修改
             db.commit()
         except:
             print('删除数据失败!')
+            print(traceback.format_exc())
             # 发生错误时回滚
             db.rollback()
 
@@ -131,13 +154,10 @@ def query_rows(db):
             cursor.execute(sql)
             # 获取所有记录列表
             results = cursor.fetchall()
-            for row in results:
-                ID = row[0]
-                Name = row[1]
-                Grade = row[2]
-                # 打印结果
-                print( "ID: %s, Name: %s, Grade: %d" % \
-                       (ID, Name, Grade))
+            print(type(results)) # <class 'list'>
+            for row in results: # <class 'tuple'>
+                print(row)
+
         except:
             print("Error: unable to fecth data")
 
