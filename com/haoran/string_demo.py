@@ -103,7 +103,7 @@ def 字符串格式化():
         # 使用的{phone:10d}等格式和format是相同的。
         # 参考：https://docs.python.org/3.7/library/string.html#formatspec
 
-    if 1:
+    if 0:
         print("方式2：str.format()方法==========")
 
         # 通过位置设置参数
