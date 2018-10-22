@@ -212,22 +212,26 @@ if 0:
 if 0:
     print("广播=====")
     # 广播是指NumPy在算术运算期间处理不同形状的阵列的能力。
-    # 对数组的算术运算通常在相应的元素上完成。如果两个阵列具有完全相同的形状，则可以平滑地执行这些操作
-    a = np.array([1, 2, 3, 4])
-    b = np.array([10, 20, 30, 40])
-    c = a * b
-    print(c)
+    # 对数组的算术运算通常在相应的元素上完成。
+    # 如果两个阵列具有完全相同的形状，则可以平滑地执行这些操作.
+
     # 如果两个数组的维度不同，则无法进行元素到元素的操作。
     # 但是，由于广播能力，在NumPy中仍然可以对非相似形状的阵列进行操作。
     # 较小的阵列被广播到较大阵列的大小，以便它们具有兼容的形状
-    # 如果满足以下规则，则可以进行广播
-    # Array with smaller ndim than the other is prepended with '1' in its shape.
-    # Size in each dimension of the output shape is maximum of the input sizes in that dimension.
-    # An input can be used in calculation, if its size in a particular dimension matches the output size or its value is exactly 1.
-    # If an input has a dimension size of 1, the first data entry in that dimension is used for all calculations along that dimension.
-    a = np.array([[1.0, 1.0, 1.0], [10.0, 10.0, 10.0], [20.0, 20.0, 20.0], [30.0, 30.0, 30.0]])
-    b = np.array([1.0, 2.0, 3.0])
-    print(a + b)
+    x = np.array([[1], [2], [3]])  # 3*1
+    y = np.array([4, 5])  # 2
+    # 过程
+    # 1、小的数组在shape前面补1，y的shape为1*2
+    # 2、输出数组的shape是输入数组shape的各个轴上的最大值，结果为3*2
+    # 3、如果输入数组的某个轴和输出数组的对应轴的长度相同或者其长度为1时，这个数组能够用来计算，
+    # 否则出错：比如说1*2*2和1*3是不能计算的
+    # a = np.ones((1, 2, 2))
+    # b = np.ones((1, 3))
+    # print(a + b)
+    # 错误，按理说结果应该为1*2*3，但是a的第三轴既不是3，也不是1，因此不能计算；改一下就可以了。
+    # 4、当输入数组的某个轴的长度为1时，沿着此轴运算时都用此轴上的第一组值
+    # y扩展为[[4, 5],[4, 5],[4, 5]],x扩展为[[1, 1], [2, 2], [3, 3]]
+    print(x + y)
 
 迭代数组 = 0
 # https://www.tutorialspoint.com/numpy/numpy_iterating_over_array.htm
@@ -273,9 +277,42 @@ if 0:
         print("%d:%d" % (x, y), end=" ")
     print()
 
+axis轴的概念 = 0
+if 0:
+    print("axis的概念=======")
+    # 一维数组时axis=0，二维数组时axis=0，1
+    #
+    # 具体到 numpy 中的多维数组来说，轴即是元素坐标的索引。
+    # 比如，第0轴即是第1个索引，延0轴计算就是去掉坐标中的第一个索引。
+    #
+    # 过程就是:
+    # - 遍历其他索引的所有可能组合
+    # - 取出一个组合，保持值不变，遍历第一个索引所有可能值
+    # - 根据索引可以获得了同一个轴上的所有元素
+    # - 对他们进行计算得到最后的元素
+    # - 所有组合的最后结果组到一起就是最后的 n-1 维数组
+    #
+    # 沿轴计算过程，可以当做沿哪一个方向进行投影再进行计算。
+    # 所以如果一个多维数组的 shape 是 (a1, a2, a3, a4),
+    # 那么延轴0计算最后的数组shape 是 (a2, a3, a4), 延轴1计算最后的数组shape是 (a1, a3, a4)
+    a = np.arange(24).reshape(2, 3, 4)
+    print(a)
+    print("axis=0——————")
+    # 理解1：sum(axis=那个维) 那个维就消失，其他维不变，对消失的维求和
+    #
+    # 理解2：当axis=0，表示把第1层的当成一个矩阵进行加法，
+    # 当axis=1，则是把2层当成矩阵加法，
+    # 当axis=2，则是把第三层元素当成矩阵进行加法
+    print(a.sum(axis=0))
+    print("axis=1——————")
+    print(a.sum(axis=0))
+    print("axis=2——————")
+    print(a.sum(axis=0))
+
 ndarray_常用方法 = 0
 # https://www.tutorialspoint.com/numpy/numpy_array_manipulation.htm
-if 1:
+Changing_Shape = 0
+if 0:
     print("Changing Shape============")
     a = np.arange(8).reshape(4, 2)
     print(a)
@@ -289,18 +326,129 @@ if 1:
     a.ravel()[1] = 100  # 不知道为什么order为C能改，'F'就改不了了。神经病
     print(a)
 
+Transpose_Operations = 0
+if 0:
     print("Transpose Operations=======")
+    a = np.arange(8).reshape(4, 2)
+    print(a)
+    print("转置==")
+    print(np.transpose(a))
+    print(a.T)
+    # 以下关于立体形象比较难想象。
+    print("rollaxis===")
+    # 轴向后滚动。其他轴的“相对”位置不会改变
+    a = np.arange(24).reshape(2, 3, 4)
+    print(a)
+    print(np.rollaxis(a, 2, 0)) # 把2轴移到0轴，其他后移;shape(4, 2, 3)
+    print("moveaxis===")  # 和上面等价
+    print(np.moveaxis(a, 0, 2))  # 把0轴移到2轴，其他往前移；shape(3,4,2)
+    print("swapaxes===")
+    print(np.swapaxes(a, 0, 1))  # 即把3维当做整体，把1、2维进行转置；shape(3,2,4)
+
+    a = np.ones((3, 4, 5, 6))
+    print(np.rollaxis(a, 3, 1).shape)  # (3, 6, 4, 5)
+    print(np.rollaxis(a, 2).shape)  # (5, 3, 4, 6)
+    print(np.rollaxis(a, 1, 4).shape)  # (3, 5, 6, 4)
 
 
-
-
+Changing_Dimensions = 0
+if 0:
     print("Changing Dimensions=========")
+    print("broadcast===")
+    x = np.array([[1], [2], [3]])  # 3*1
+    y = np.array([4, 5, 6])  # 3
+    b = np.broadcast(x, y)  # <class 'numpy.broadcast'>
+    print(b.shape)  # (3, 3)
+    print(x + y)
+    c = np.empty(b.shape)
+    c.flat = [u + v for (u, v) in b]
+    print(c)
+    print("broadcast_to===")
+    a = np.arange(4).reshape(1, 4)
+    print(np.broadcast_to(a, (4, 4)))
+    print("expand_dims===")
+    # 通过在指定位置插入新轴来扩展阵列
+    x = np.array(([1, 2], [3, 4]))
+    print(x.shape)  # 2*2
+    y = np.expand_dims(x, axis=0)  # 1*2*2
+    print(y)
+    y = np.expand_dims(x, axis=1)  # 2*1*2
+    print(y)
+    print("squeeze===")
+    # 从给定数组的shape中删除一维条目
+    x = np.arange(9).reshape(1, 3, 3)
+    print(np.squeeze(x))
 
+
+Joining_Arrays = 0
+if 0:
     print("Joining Arrays=========")
+    print("concatenate===")
+    # 用于沿指定轴连接两个或多个相同shape的数组
+    a = np.array([[1, 2], [3, 4]])
+    b = np.array([[5, 6], [7, 8]])
+    print(np.concatenate((a, b)))  # 默认0
+    print(np.concatenate((a, b), axis=1))
 
+    print("stack====")
+    # 沿新轴连接数组序列
+    print(np.stack((a, b), 0))
+    print(np.stack((a, b), 1))
+
+    print("hstack===")
+    # 用于堆叠，以便水平生成单个数组
+    print(np.hstack((a,b)))
+
+    print("vstack===")
+    # 用于堆叠，以便垂直生成单个数组
+    print(np.vstack((a,b)))
+
+
+Splitting_Arrays = 0
+if 0:
     print("Splitting Arrays==========")
+    print("split===")
+    # 将数组沿指定轴划分为子数组
+    a = np.arange(9)
+    print("以大小划分：", np.split(a, 3))
+    print("以位置划分：", np.split(a, [4, 7]))
 
+    print("hsplit和vsplit===")
+    # split的特例
+    a = np.arange(16).reshape(4, 4)
+    print(np.hsplit(a, 2))
+    print(np.vsplit(a, 2))
+
+
+Adding_Removing_Elements = 0
+if 1:
     print("Adding / Removing Elements========")
+    a = np.array([[1, 2, 3], [4, 5, 6]])  # 2*3
+    print("resize===")
+    # 如果新大小大于原始大小，则包含原始条目的重复副本
+    print(np.resize(a, (2, 4)))
+    print(np.resize(a, (3, 4)))
+
+    print("append===")
+    print(np.append(a, [7, 8, 9]))  # 未指定axis，会被碾平
+    print(np.append(a, [[7, 8, 9]], axis=0))
+    print(np.append(a, [[5, 5, 5], [7, 8, 9]], axis=1))
+
+    print("insert===")
+    a = np.array([[1, 2], [3, 4], [5, 6]])
+    print(np.insert(a, 3, [11, 12]))
+    print(np.insert(a, 1, [11], axis=0))  # 中括号不加也可以，最好加上
+    print(np.insert(a, 1, [11], axis=1))
+
+    print("delete===")
+    # 删除了指定的子数组（可以是切片，整数或整数数组，指示要从输入数组中删除的子数组）
+    a = np.arange(12).reshape(3, 4)
+    print(a)
+    print(np.delete(a, 5))
+    print(np.delete(a, 1, axis=1))
+    a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    print(np.delete(a, np.s_[::2]))  # 切片删除？
+
 
 
 
