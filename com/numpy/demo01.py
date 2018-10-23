@@ -1,7 +1,6 @@
 
 import numpy as np
 
-
 ndarray_对象简介 = 0
 # https://www.tutorialspoint.com/numpy/numpy_ndarray_object.htm
 if 0:
@@ -11,6 +10,33 @@ if 0:
     print(np.array([1, 2, 3.0]))
     print(np.array([[1, 2], [3, 4]]))
     print(np.array([1, 2, 3], ndmin=2))
+
+副本和视图 = 0
+if 0:
+    print("引用传递====")
+    a = np.arange(6)
+    b = a
+    print(id(a) == id(b))
+    b.shape = 3, 2
+    print(a)  # 完全是同一个对象
+
+    print("浅复制====")
+    a = np.arange(6)
+    b = a.view()
+    print(id(a) == id(b))  # False
+    b.shape = 3, 2
+    print(a)  # 没有改变
+    b[1][0] = 100
+    print(a)  # 发生改变
+
+    print("深度复制===")
+    a = np.arange(6)
+    b = a.copy()
+    print(id(a) == id(b))  # False
+    b.shape = 3, 2
+    print(a)  # 没有改变
+    b[1][0] = 100
+    print(a)  # 没有改变
 
 数据类型 = 0
 # https://www.tutorialspoint.com/numpy/numpy_data_types.htm
@@ -93,7 +119,7 @@ if 0:
 if 0:
     print("empty创建空数组=======")
     x2 = np.empty([3, 2], dtype=int)
-    print(x2) # 数组中的元素显示随机值，因为它们未初始化(在Shell中显示正常，在Pycharm中大部分情况下显示为0，不知道为什么)
+    print(x2)  # 数组中的元素显示随机值，因为它们未初始化(在Shell中显示正常，在Pycharm中大部分情况下显示为0，不知道为什么)
 
     print("zeros用0填充====")
     x = np.zeros((2, 2), dtype=[('x', 'i4'), ('y', 'i4')])
@@ -280,6 +306,8 @@ if 0:
 axis轴的概念 = 0
 if 0:
     print("axis的概念=======")
+    # 可以参考一下统计函数，根据一维和二维，类比到三维以及多维
+
     # 一维数组时axis=0，二维数组时axis=0，1
     #
     # 具体到 numpy 中的多维数组来说，轴即是元素坐标的索引。
@@ -397,11 +425,11 @@ if 0:
 
     print("hstack===")
     # 用于堆叠，以便水平生成单个数组
-    print(np.hstack((a,b)))
+    print(np.hstack((a, b)))
 
     print("vstack===")
     # 用于堆叠，以便垂直生成单个数组
-    print(np.vstack((a,b)))
+    print(np.vstack((a, b)))
 
 
 Splitting_Arrays = 0
@@ -421,7 +449,7 @@ if 0:
 
 
 Adding_Removing_Elements = 0
-if 1:
+if 0:
     print("Adding / Removing Elements========")
     a = np.array([[1, 2, 3], [4, 5, 6]])  # 2*3
     print("resize===")
@@ -449,12 +477,227 @@ if 1:
     a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     print(np.delete(a, np.s_[::2]))  # 切片删除？
 
+    print("unique===")
+    # 返回输入数组中的唯一元素数组，就是去重
+    a = np.array([5, 2, 6, 2, 7, 5, 6, 8, 2, 9])
+    u = np.unique(a)
+    print(u)
+    # return_index：如果为True，则返回输入数组中元素的索引
+    # return_inverse：如果为True，则返回唯一数组的索引，该索引可用于重建输入数组
+    # return_counts：如果为True，则返回唯一数组中的元素出现在原始数组中的次数
+    u, indices, inverse, counts = np.unique(a, return_index=True, return_inverse=True, return_counts=True)
+    print(u, indices, inverse, counts)  # 返回输入数组中元素的索引
 
 
+字符串函数 = 0
+# https://www.tutorialspoint.com/numpy/numpy_string_functions.htm
+if 0:
+    print("字符串函数========")
+    print("元素字符串连接===")
+    print(np.char.add(['hello', 'hi'], [' abc', ' xyz']))
+    print("重复连接===")
+    print(np.char.multiply("hello ", 3))
+    print("返回所需宽度的数组===")
+    print(np.char.center('hello', 20, fillchar='*'))
+    print(np.char.capitalize('hello world'))  # 首字母大写
+    print(np.char.upper('hello world'))  # 大写
+    print(np.char.lower(['HELLO', 'WORLD']))  # 小写
+    print(np.char.split('TutorialsPoint,Hyderabad,Telangana', sep=','))  # 切割字符串，默认是空格
+    print(np.char.splitlines('hello\nhow are you?'))  # '\n'，'\r'，'\r\n'可用作行边界
+    print(np.char.strip(['arora', 'admin', 'java'], 'a'))  # 减去前后缀
+    print(np.char.lstrip(['arora', 'admin', 'java'], 'a'))  # 减去前缀
+    print(np.char.join([':', '-'], ['dmy', 'ymd']))  # 用给定的字符连接
+    print("替换字符串======")
+    print(np.char.replace('He is a good boy', 'is', 'was'))
+    print("编码和解码===")
+    a = np.char.encode('hello', 'cp500')
+    print(a)
+    print(np.char.decode(a, 'cp500'))
 
-
-二元运算符 = 0
+数学_位运算 = 0
 # https://www.tutorialspoint.com/numpy/numpy_binary_operators.htm
+if 0:
+    a, b = 13, 17
+    print(1, np.binary_repr(a, width=8))
+    print(2, np.binary_repr(b, width=8))
+    print(3, np.binary_repr(np.bitwise_and(a, b), width=8))  # 全部为1，结果才为1
+    print(4, np.binary_repr(np.bitwise_or(a, b), width=8))  # 有一个为1，结果就为1
+    print(5, np.binary_repr(np.invert(a), width=8))  # 进行翻转
+    print(6, np.binary_repr(np.left_shift(a, 2), width=8))  # 左移两位
+    print(7, np.binary_repr(np.right_shift(a, 2), width=8))  # 右移两位
+
+数学_舍入功能 = 0
+# https://www.tutorialspoint.com/numpy/numpy_mathematical_functions.htm
+if 0:
+    print("三角函数====跳过====")
+
+    print("舍入功能=======")
+    a = np.array([1.5, -5.55, 123, -0.567, 25.532])
+    print(np.around(a, decimals=1))  # 小数位数
+    print(np.around(a, decimals=2))
+    print(np.around(a, decimals=-1))
+
+    print(np.floor(a))  # 地板
+    print(np.ceil(a))  # 天花板
+
+
+数学_算数运算 = 0
+# https://www.tutorialspoint.com/numpy/numpy_arithmetic_operations.htm
+if 0:
+    print("加减乘除=====")
+    a = np.arange(9, dtype=np.float_).reshape(3, 3)
+    b = np.array([10, 10, 10])  # 可广播
+    print(a, b)
+    print(np.add(a, b))  # 等价于a+b
+    print(np.subtract(a, b))
+    print(np.multiply(a, b))
+    print(np.divide(a, b))
+
+    print("倒数===")
+    # 对于int类型绝对值大于1的元素，结果始终为0，因为Python处理整数除法的方式。
+    # 对于整数0，发出溢出警告
+    a = np.array([0.25, 1.33, 1, 0, 100])
+    print(a)
+    print(np.reciprocal(a))  # RuntimeWarning
+
+    print("幂函数====")
+    a = np.arange(1, 5)
+    print(np.power(a, 2))
+    print(np.power(a, [3, 2, 0, 4]))
+
+    print("求余数===")
+    a = np.array([10, 20, 30])
+    b = np.array([3, 5, 7])
+    print(np.mod(a, b))
+    print(np.remainder(a, b))  # 同上
+
+    print("复数操作===跳过")
+
+统计函数 = 0
+# https://www.tutorialspoint.com/numpy/numpy_statistical_functions.htm
+if 0:
+    print("最大和最小值====")
+    # 沿指定轴返回给定数组中元素的最小值和最大值
+    a = np.array([[3, 7, 5], [8, 4, 3], [2, 4, 9]])
+    print(np.amin(a, 0))
+    print(np.amin(a, 1))
+    print(np.amax(a, axis=0))
+    print(np.amax(a, axis=1))
+
+    print("范围===")
+    # 沿轴线返回值的范围（最大值-最小值）
+    print(np.ptp(a))
+    print(np.ptp(a, 0))
+    print(np.ptp(a, 1))
+
+    print("百分比===")
+    # https://blog.csdn.net/u011630575/article/details/79451357
+    #
+    b = range(1, 101)
+    print(np.percentile(b, 90))  # 90.1 #表示有百分之九十的数小于90.1
+    print(np.percentile(a, 50, 0))  # [3. 4. 5.]  表示有百分之五十的数小于xxx
+    print(np.percentile(a, 70, 1))  # [5.8 5.6 6. ]  表示有70%的数小于5.8
+
+    print("中位数===")
+    a = np.array([[30, 65, 70], [80, 95, 10], [50, 90, 60]])
+    print(np.median(a))
+    print(np.median(a, 0))
+    print(np.median(a, 1))
+
+    print("平均值===")
+    a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print(np.mean(a))
+    print(np.mean(a, 0))
+    print(np.mean(a, 1))
+
+    print("加权平均值====")
+    # 考虑阵列[1,2,3,4]和相应的权重[4,3,2,1]，通过将相应元素的乘积相加并将总和除以权重之和来计算加权平均值。
+    # 加权平均值=（1 * 4 + 2 * 3 + 3 * 2 + 4 * 1）/（4 + 3 + 2 + 1）
+    a = np.array([1, 2, 3, 4])
+    wts = np.array([4, 3, 2, 1])
+    print(np.average(a, weights=wts, returned=True))
+    # 在多维数组中，可以指定用于计算的轴
+
+    print("标准偏差====")
+    # 标准偏差是平均偏差平均值的平方根
+    # 公式：std = sqrt(mean(abs(x - x.mean())**2))
+    print(np.std([1, 2, 3, 4]))
+
+    print("方差===")
+    # 方差是平方偏差的平均值，即mean(abs(x - x.mean())**2)。换句话说，标准差是方差的平方根。
+    print(np.var([1, 2, 3, 4]))
+
+
+排序_搜索_计数功能 = 0
+# https://www.tutorialspoint.com/numpy/numpy_sort_search_counting_functions.htm
+if 0:
+    print("排序=========")
+    # https://blog.csdn.net/Haiyang_Duan/article/details/79221458?utm_source=blogxgwz0
+    print("sort====")
+    # numpy.sort(a, axis, kind, order)
+    # kind默认是快速排序
+    a = np.array([[3, 7], [9, 1]])
+    print(np.sort(a))
+    print(np.sort(a, axis=0))  # 默认-1
+
+    dt = np.dtype([('name', 'S10'), ('age', int)])
+    a = np.array([("raju", 21), ("anil", 25), ("ravi", 17), ("amar", 27)], dtype=dt)
+    print(np.sort(a, order='name'))
+    print(np.sort(a, order='age'))
+
+    print("argsort====")
+    # 返回的是数组值从小到大的索引值
+    x = np.array([3, 1, 2])
+    print(np.argsort(x))  # [1 2 0]
+    print("升序排列：", x[np.argsort(x)])
+    print("降序排列：", x[np.argsort(-x)])
+    x = np.array([[0, 3], [2, 2]])
+    print(np.argsort(x, axis=0))
+    print(np.argsort(x, axis=1))
+
+    print("lexsort====")
+    a = [1, 5, 1, 4, 3, 4, 4]
+    b = [9, 4, 0, 4, 0, 2, 1]
+    ind = np.lexsort((b, a))
+    print(ind)
+    print([str(a[i]) + ":" + str(b[i]) for i in ind])
+    # Sort by a, then by b
+    # 如a中的最小值为两个1，其索引分别为0,2，再比较b中相应索引上的值，即9,0
+    # 比较(1,0)和(1,9)，前者小，然后它的索引是2，所以排序后返回的结果第一个值为索引2
+    # 下一个：(1,9)，对应的索引为0，所以排序后返回的结果第一个值为索引0
+    # 以此类推...
+
+    c = [[9, 4, 0, 4, 0, 2, 1], [1, 5, 1, 4, 3, 4, 4]]  # [b, a]
+    print(np.lexsort(c))  # 同上 先a后b
+
+
+    print("argmax和argmin======")
+    # 别沿给定轴返回最大和最小元素的索引
+    a = np.array([[30, 40, 70], [80, 20, 10], [50, 90, 60]])
+    print(np.argmax(a, 0))
+    print(np.argmax(a, 1))
+    print(np.argmin(a, 1))
+
+    print("nonzero=====")
+    # 返回输入数组中的非零元素的索引
+    a = np.array([[30, 0, 0], [0, 20, 10], [50, 0, 60]])
+    print(a)  # 3*3 二维
+    print(np.nonzero(a))
+    print(a[np.nonzero(a)])
+
+    print("where=====")
+    # 返回满足给定条件的输入数组中元素的索引
+    x = np.arange(9.).reshape(3, 3)
+    print(x[np.where(x > 3)])
+
+    print("extract===")
+    # 返回满足任何条件的元素
+    condition = np.mod(x, 2) == 0
+    print(condition)
+    print(np.extract(np.mod(x, 2) == 0, x))
+
+
+
 
 
 
