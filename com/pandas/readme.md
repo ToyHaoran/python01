@@ -3,7 +3,8 @@
 [官方文档](https://pandas.pydata.org/pandas-docs/stable/index.html)
 [某教程](https://www.tutorialspoint.com/python_pandas/index.htm)
 
-使用Pandas，我们可以完成数据处理和分析中的五个典型步骤，无论数据来源如何：加载，准备，操作，建模和分析。
+使用Pandas，我们可以完成数据处理和分析中的五个典型步骤，
+无论数据来源如何：加载，准备，操作，建模和分析。
 
 主要特点：
 - 具有默认和自定义索引的快速高效的DataFrame对象。

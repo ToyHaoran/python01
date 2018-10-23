@@ -697,15 +697,3 @@ if 0:
     print(np.extract(np.mod(x, 2) == 0, x))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
