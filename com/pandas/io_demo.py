@@ -8,7 +8,12 @@ IO工具_CVS读取 = 0
 # https://www.tutorialspoint.com/python_pandas/python_pandas_io_tool.htm
 if 1:
     print("读取csv文件====")
-    print(pd.read_csv("temp.csv"))
+    df = pd.read_csv("temp.csv")
+    print(df)
+    print("相当于select name,age from df limit 3=====")
+    print(df[["Name", "Age"]].head(3))
+    print("where条件======")
+    print(df[df["Age"] >= 30])
 
     print("自定义索引========")
     print(pd.read_csv("temp.csv", index_col=['S.No']))

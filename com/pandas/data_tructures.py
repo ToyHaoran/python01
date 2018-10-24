@@ -601,6 +601,7 @@ if 0:
                 'Points': [876, 789, 863, 673, 741, 812, 756, 788, 694, 701, 804, 690]}
     df = pd.DataFrame(ipl_data)
     print("将数据拆分为组=======")
+    # 等价于sql中的groupby
     grouped = df.groupby('Team')
     # df.groupby(['Team', 'Year'])
     print(type(grouped))
