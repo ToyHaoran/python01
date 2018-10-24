@@ -10,24 +10,25 @@ __author__ = 'lihaoran'
 # 第6行使用__author__变量把作者写进去，这样当你公开源代码后别人就可以瞻仰你的大名；
 # 以上就是Python模块的标准文件模板，当然也可以全部删掉不写，但是，按标准办事肯定没错
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # 如果在其他地方导入该模块时，if判断将失败
     print("demo03==========")
     print('程序自身在运行')
     if 0:
         print("导包相关操作==================")
-        import sys # import sys 引入 python 标准库中的 sys.py 模块；这是引入某一模块的方法
-        for i in sys.argv: # sys.argv 是一个包含命令行参数的列表
+        import sys  # import sys 引入 python 标准库中的 sys.py 模块；这是引入某一模块的方法
+
+        for i in sys.argv:  # sys.argv 是一个包含命令行参数的列表
             print(i)
-        sys.path.insert(0,r'C:\code\project\com')
-        print ('python 路径为',sys.path) # sys.path 包含了一个 Python 解释器自动查找所需模块的路径的列表，注意是一个list
+        sys.path.insert(0, r'C:\code\project\com')
+        print('python 路径为', sys.path)  # sys.path 包含了一个 Python 解释器自动查找所需模块的路径的列表，注意是一个list
         # C:\\code\\project\\com', 'H:\\code\\idea\\python\\com\\haoran\\module\\test1', 'H:\\code\\idea\\python'
 
-
     if 0:
-        #从顶级包开始导入，绝对路径
+        # 从顶级包开始导入，绝对路径
         print("导入自定义的包===============")
-        import com.haoran.module.test1.demo04 as d4 # 可以重命名
+        import com.haoran.module.test1.demo04 as d4  # 可以重命名
+
         d4.fib(100)
         # print(d4.fib2(100)) # fib2是私有函数，无法引用，只能在demo4模块内用。
 

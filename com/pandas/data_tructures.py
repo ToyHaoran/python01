@@ -3,6 +3,7 @@
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 Series创建 = 0
 # https://pandas.pydata.org/pandas-docs/stable/dsintro.html#dsintro
@@ -80,9 +81,9 @@ if 0:
     print(pd.Series(np.random.randn(5), name='something').name)
     print(s.rename("lihaoran").name)
 
-Time_Series = 0
+Series_时间 = 0
 # https://www.tutorialspoint.com/python_pandas/python_pandas_concatenation.htm
-if 1:
+if 0:
     print("当前时间=======")
     print(pd.datetime.now())
 
@@ -93,7 +94,64 @@ if 1:
     print("创建一个时间范围========")
     print(pd.date_range("11:00", "13:30", freq="30min").time)
     print(pd.date_range("11:00", "13:30", freq="H").time)
+    print(pd.date_range("20180808", "20180817"))
+    print(pd.date_range("20180808", periods=5, freq="2D"))
 
+    print("转为时间戳=======")
+    print(pd.to_datetime(pd.Series(['Jul 31, 2009','2010-01-10', None])))
+
+Series_日期 = 0
+# https://www.tutorialspoint.com/python_pandas/python_pandas_date_functionality.htm
+if 0:
+    print("date_range========")
+    print(pd.date_range("20180808", "20180817"))
+    print(pd.date_range('1/1/2011', periods=5))
+    print(pd.date_range('1/1/2011', periods=5, freq='M'))
+    print(pd.date_range('1/1/2011', periods=5, freq='2D'))
+    print("bdate_range=========")
+    # 不包括星期六和星期日
+    print(pd.bdate_range('3/2/2011', periods=5))
+    print("====")
+    start = pd.datetime(2011, 1, 1)
+    end = pd.datetime(2011, 1, 5)
+    print(pd.date_range(start, end))
+
+    # Alias	Description	                        Alias	Description
+    # B	    business day frequency	            BQS	    business quarter start frequency
+    # D	    calendar day frequency	            A	    annual(Year) end frequency
+    # W	    weekly frequency	                BA	    business year end frequency
+    # M	    month end frequency	                BAS	    business year start frequency
+    # SM	semi-month end frequency	        BH	    business hour frequency
+    # BM	business month end frequency	    H	    hourly frequency
+    # MS	month start frequency	            T, min	minutely frequency
+    # SMS	SMS semi month start frequency	    S	    secondly frequency
+    # BMS	business month start frequency	    L, ms	milliseconds
+    # Q	    quarter end frequency	            U, us	microseconds
+    # BQ	business quarter end frequency	    N	    nanoseconds
+    # QS	quarter start frequency
+
+Timedelta对象 = 0
+# https://www.tutorialspoint.com/python_pandas/python_pandas_timedelta.htm
+if 0:
+    print("感觉像个计时器=====")
+    print(pd.Timedelta('2 days 2 hours 15 minutes 30 seconds'))
+    print(pd.Timedelta(6, unit='h'))
+    print(pd.Timedelta(days=2))
+    print(pd.to_timedelta(['2D 2H 15min 30S', "6H"]))
+
+    print("操作=======")
+    # 现在让我们使用Timedelta和datetime对象创建一个DataFrame，并对其执行一些算术运算
+    s = pd.Series(pd.date_range('2012-1-1', periods=3, freq='D'))
+    td = pd.Series([pd.Timedelta(days=i) for i in range(3)])
+    df = pd.DataFrame(dict(A=s, B=td))
+    print(df)
+
+    print("日期相加=====")
+    df['C'] = df['A'] + df['B']
+    print(df)
+    print("日期相减======")
+    df['D'] = df['C'] - df['B']
+    print(df)
 
 DataFrame创建 = 0
 # https://pandas.pydata.org/pandas-docs/stable/dsintro.html#dsintro
@@ -213,6 +271,7 @@ if 0:
     print(df.iat[1, 1])
 
     # ix方法已经被遗弃了，不使用
+    # 用reindex代替
 
 
 DF的基本属性 = 0
@@ -517,6 +576,21 @@ if 0:
     print("删除缺失值====")
     print(df.dropna())
 
+    print("稀疏对象====")
+    # 占用更少的内存
+    # https://www.tutorialspoint.com/python_pandas/python_pandas_sparse_data.htm
+    ts = pd.Series(np.random.randn(10))
+    ts[2:-2] = np.nan
+    sts = ts.to_sparse()
+    print(sts)
+    print("密度：", sts.density)
+
+    # 调用to_dense可以将任何稀疏对象转换回标准密集形式-
+    print(sts.to_dense())
+
+
+
+
 分组 = 0
 # https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm
 if 0:
@@ -600,4 +674,14 @@ if 0:
     print(pd.concat([one, two], keys=['x', 'y']))
     print("重建索引=======")
     print(pd.concat([one, two], keys=['x', 'y'], ignore_index=True))
+
+Categorical_Data跳过 = 0
+# https://www.tutorialspoint.com/python_pandas/python_pandas_categorical_data.htm
+if 0:
+    pass
+
+
+
+
+
 
