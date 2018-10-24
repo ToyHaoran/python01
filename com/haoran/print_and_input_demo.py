@@ -17,7 +17,7 @@ if 0:
 if 0:
     print("print函数=============")
     print("hello world")
-    print("hello", "你好", "我是666", sep="--", end=";") # 都是有默认选项的
+    print("hello", "你好", "我是666", sep="--", end=";")  # 都是有默认选项的
     print()
 
 
