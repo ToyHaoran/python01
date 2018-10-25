@@ -81,6 +81,34 @@ if 0:
     print(pd.Series(np.random.randn(5), name='something').name)
     print(s.rename("lihaoran").name)
 
+Series_方法 = 0
+if 0:
+    print("size和count以及value_count的不同==========")
+    df = pd.DataFrame(np.arange(6).reshape(2, 3), columns=["A", "B", "C"])
+    print(df)
+    # 计算数组和矩阵所有数据的个数
+    # 不是有多少行，SB
+    print(df.size)  # 2*3 = 6
+    print(len(df))  # 这个才是求多少行
+
+    print("对每个轴进行计数（去除NaN）======")
+    print(df.count(axis=0))  # 默认0轴
+    print(df.count(axis=1))
+    # 最实用的还是shape
+    print(df.shape)
+
+    print("value_counts=====")
+    s = pd.Series([1, 2, 2, 3, 4])
+    # value_counts对Series里面的每个值进行计数并且排序
+    # 空值是默认剔除掉的。value_counts()返回的结果是一个Series数组
+    count = s.value_counts()
+    print(count)  # 相当于单轴的
+    print(count.index)
+    print(count.reset_index())  # 原来的索引会自成一列
+    print(count.reset_index(drop=True))  # 把原来的索引删除
+
+    # 同理，也适用于DF
+
 Series_时间 = 0
 # https://www.tutorialspoint.com/python_pandas/python_pandas_concatenation.htm
 if 0:
@@ -195,19 +223,26 @@ if 0:
 
     print("列操作===================")
     print("选择某列====")
+    print("注意：只要选择一列就是一个Series========")
     print(df["A"])
-    print(df.A)
+    print(type(df["A"]))  # <class 'pandas.core.series.Series'>
+    print(type(df.A))  # 同上
     print(df[["A", "B"]])
+    print(type(df[["A", "B"]]))  # <class 'pandas.core.frame.DataFrame'>
     print("添加某列====")
     df['E'] = ['one', 'two', 'three', 'four', 'five', "six"]
     df["F"] = df['A'] + df["B"]
+    df.insert(0, "第一列", ['one', 'two', 'three', 'four', 'five', "six"])
+
     print(df)
     print("删除某列====")
     del df["E"]  # 删除
     df.pop("F")  # 弹出
+    df = df.drop("第一列", axis=1)  # 通过轴删除行或者列
     print(df)
 
     print("行操作=================")
+    print(type(df[:1])) # <class 'pandas.core.frame.DataFrame'>
     print(df[1:3])  # 可以理解为下标是1、2的行（推荐，左毕右开原则）；或者理解为第2、3行。
     print(df['20130102':'20130104'])  # 2,3,4行
     print("添加行========")
@@ -215,7 +250,7 @@ if 0:
     print(df)
     print(df.append(pd.Series({"A": 6, "B": 6}), ignore_index=True))  # 不知道为什么一直报错。。。
     print("删除行======")
-    df = df.drop("new_row")
+    df = df.drop("new_row", axis=0)  # 默认0
     print(df)
 
 DF数据访问_按标签 = 0
@@ -232,6 +267,10 @@ if 0:
     print(df.loc[dates[1], ['A', 'B']])
     print(df.loc['20130102', ['A', 'B']])
     print(df.loc[:, ['A', 'B']])
+    # 注意加[]表示多列，返回的是DF
+    print(df.loc[:, ['A']])
+    # 不加，返回Series，可以用unique()方法
+    print(df.loc[:, 'A'].unique())
     print(df.loc['20130102':'20130104', ['A', 'B']])  # 2、3、4行的A、B列
 
     print("选择某个具体值=======")

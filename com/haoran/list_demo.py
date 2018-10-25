@@ -44,6 +44,74 @@ if 0:
     a.sort()  #[3, 3, 4, 9]
     a.clear()
 
+列表去重的几种方式 = 0
+if 0:
+    print("使用内置set方法来去重==常用====")
+    lst1 = [2, 1, 3, 4, 1]
+    lst2 = list(set(lst1))
+    print(lst2)
+
+    print("使用字典中fromkeys()的方法来去重====")
+    lst1 = [2, 1, 3, 4, 1]
+    lst2 = {}.fromkeys(lst1).keys()
+    print(lst2)
+
+    print("使用常规方法来去重=====")
+    lst1 = [2, 1, 3, 4, 1]
+    temp = []
+    for item in lst1:
+        if not item in temp:
+            temp.append(item)
+    print(temp)
+
+    print("使用列表推导来去重=======")
+    lst1 = [2, 1, 3, 4, 1]
+    temp = []
+    [temp.append(i) for i in lst1 if not i in temp]
+    print(temp)
+
+    print("使用sorted函数来去重=====")
+    lst1 = [2, 1, 3, 4, 1]
+    # 能保证顺序
+    lst2 = sorted(set(lst1), key=lst1.index)
+    print(lst2)
+
+统计list中各个元素出现的次数 = 0
+# https://blog.csdn.net/sinat_24091225/article/details/77925473
+if 0:
+    print("利用字典dict来完成统计==（较慢）=====")
+    a = [1, 2, 3, 1, 1, 2]
+    dict1 = {}
+    for key in a:
+        dict1[key] = dict1.get(key, 0) + 1
+    print(dict1)
+
+    print("利用Python的collection包下Counter的类===（特别快）====")
+    from collections import Counter
+    a = [1, 2, 3, 1, 1, 2]
+    print(dict(Counter(a)))
+
+    print("numpy包中的unique======（最快）=======")
+    import numpy as np
+    lst = [1, 2, 3, 1, 1, 2]
+    print(dict(zip(*np.unique(lst, return_counts=True))))
+
+    print("pandas包下的value_counts方法=========")
+    import pandas as pd
+    a = [1, 2, 3, 1, 1, 2]
+    result = pd.value_counts(a)
+    print(result)
+
+    print("矩阵====")
+    a = pd.DataFrame([[1, 2, 3],
+                      [3, 1, 3],
+                      [1, 2, 1]])
+    result = a.apply(pd.value_counts)
+    print(result)
+    #     0    1    2
+    # 1  2.0  1.0  1.0  # 表示元素1在第一列出现2次，在第二列出现1次，在第三列出现1次
+    # 2  NaN  2.0  NaN  # 表示元素2在第一列出现0次，在第二列出现2次，在第三列出现0次
+    # 3  1.0  NaN  2.0  # 表示元素3在第一列出现1次，在第二列出现0次，在第三列出现2次
 
 数据结构_堆栈 = 0
 if 0:
