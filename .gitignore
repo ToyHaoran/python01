@@ -1,1 +1,8 @@
-/data/cifar-10-batches-py/
+data/*
+pytorch_note/data
+pytorch_note/dataset
+pytorch_note/data/*
+pytorch_note/dataset/*
+
+pytorch_note/model/
+pytorch_note/model/*
