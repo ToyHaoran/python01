@@ -3,7 +3,7 @@
 
 # pytorch_note
 主要笔记
-(data和model太大暂时没有上传)
+(data和model没有上传)
 
 # tensorflow_note
 暂时以pytorch为主，这个先放一放
